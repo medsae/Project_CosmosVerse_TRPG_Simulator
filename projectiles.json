@@ -1,0 +1,20 @@
+{
+  "cannon_light": {
+    "muzzle_velocity": 3500.0,
+    "mass": 2.0,
+    "moa": 0.5,
+    "rpm": 600,
+    "yield_radius": 5.0,
+    "lifespan": 50.0,
+    "desc": "近防炮"
+  },
+  "railgun_heavy": {
+    "muzzle_velocity": 10000.0,
+    "mass": 50.0,
+    "moa": 0.01,
+    "rpm": 10,
+    "yield_radius": 15.0,
+    "lifespan": 50.0,
+    "desc": "轨道炮"
+  }
+}

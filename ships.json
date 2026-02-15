@@ -1,0 +1,22 @@
+{
+  "ships": [
+    { "name": "049", "fuelmass": 140000.0, "drymass": 180000.0, "area": 10.0, "heat": 300.0, "flowrate": 800.0, "max_thrust": 8000000.0, "height": 6480000.0, "initial_position": 0.0 },
+    { "name": "051", "fuelmass": 140000.0, "drymass": 180000.0, "area": 10.0, "heat": 300.0, "flowrate": 800.0, "max_thrust": 8000000.0, "height": 10480000.0, "initial_position": 180.0 },
+    { "name": "052", "fuelmass": 140000.0, "drymass": 180000.0, "area": 10.0, "heat": 300.0, "flowrate": 800.0, "max_thrust": 8000000.0, "height": 20480000.0, "initial_position": 90.0 },
+    { "name": "053", "fuelmass": 200000.0, "drymass": 120000.0, "area": 12.0, "heat": 350.0, "flowrate": 900.0, "max_thrust": 100000000.0, "height": 55480000.0, "initial_position": 45.0 }
+  ],
+  "missile_templates": {
+    "S": {
+      "name": "Interceptor-S", "fuel": 80.0, "dry": 15.0, "thrust": 4000.0, "flow": 4.0,
+      "fuse_range": 60.0, "yield_radius": 120.0, "desc": "小型近程截击弹"
+    },
+    "M": {
+      "name": "Interceptor-M", "fuel": 500.0, "dry": 50.0, "thrust": 15000.0, "flow": 12.0,
+      "fuse_range": 150.0, "yield_radius": 350.0, "desc": "中型多用途导弹"
+    },
+    "L": {
+      "name": "Interceptor-L", "fuel": 20000.0, "dry": 100.0, "thrust": 600000.0, "flow": 100.0,
+      "fuse_range": 300.0, "yield_radius": 800.0, "desc": "重型高能远程拦截器"
+    }
+  }
+}
