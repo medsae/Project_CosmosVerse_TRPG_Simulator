@@ -8,6 +8,7 @@ import command
 import physics
 from tactical_sim import TacticalManager
 from visualizer import SpaceVisualizer
+import star_loader  # 新增导入
 
 
 def load_ships_from_config(filename):
@@ -60,31 +61,48 @@ def input_thread(body, ships, tac_manager):
 
 
 def main():
-    # 地球物理参数
-    Earth = Star("Terra", 5.98e24, 6.38e6)
+    # 1. 加载所有恒星
+    all_stars = star_loader.load_all_stars('stars.json')
 
-    # 加载飞船
+    # 2. 交互式选择
+    print("\n" + "=" * 30)
+    print("请选择初始模拟环境:")
+    for i, star in enumerate(all_stars):
+        print(f"[{i}] {star.name}")
+
+    choice = input("请输入编号 (默认为0): ").strip()
+    idx = int(choice) if choice.isdigit() and 0 <= int(choice) < len(all_stars) else 0
+    Earth = all_stars[idx]
+    print(f"✅ 已载入环境: {Earth.name}")
+
+    # --- 【重点修复】：必须先加载飞船，再调用 dashboard ---
+    # 3. 加载飞船数据 (在这里定义 ships 变量)
     ships = load_ships_from_config('ships.json')
     if not ships:
-        print("❌ 未能加载飞船数据，程序退出。")
+        print("❌ 飞船载入失败，程序终止。")
         return
 
-    # 初始化战术管理器
+    # 4. 初始化战术管理器
     tac_manager = TacticalManager(Earth)
 
-    with open('projectiles.json', 'r', encoding='utf-8') as f:
-        proj_templates = json.load(f)
-        tac_manager.proj_manager.templates = proj_templates
-    # 打印初始看板
+    # 5. 加载投影模板
+    try:
+        with open('projectiles.json', 'r', encoding='utf-8') as f:
+            proj_templates = json.load(f)
+            tac_manager.proj_manager.templates = proj_templates
+    except FileNotFoundError:
+        print("⚠️ 未找到 projectiles.json，使用默认配置。")
+
+    # 6. 打印初始看板 (现在 ships 已经定义了，不会报错)
     dashboard.display_dashboard(Earth, ships)
 
-    # 启动指令监听线程
+    # 7. 启动指令监听线程
     t = threading.Thread(target=input_thread, args=(Earth, ships, tac_manager), daemon=True)
     t.start()
 
     print("\n[系统] 轨道图启动中... 请在大地图输入指令。")
 
-    # 启动可视化窗口
+    # 8. 启动可视化窗口
     viz = SpaceVisualizer(Earth, ships, tac_manager)
     viz.run_loop()
 

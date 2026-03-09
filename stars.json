@@ -1,0 +1,7 @@
+{
+  "stars": [
+    { "name": "Terra", "mass": 5.98e24, "radius": 6.38e6 },
+    { "name": "Luna", "mass": 7.34e22, "radius": 1.73e6 },
+    { "name": "Mars", "mass": 6.41e23, "radius": 3.39e6 }
+  ]
+}
